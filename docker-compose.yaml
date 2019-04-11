@@ -1,0 +1,12 @@
+version: "3"
+services:
+  compute-pi:
+    container_name: compute-pi
+    build:
+      context: .
+      args:
+        RELEASE_VER: ${RELEASE_VER}
+    environment:
+      - PORT=80
+    ports:
+      - "8080:80"
