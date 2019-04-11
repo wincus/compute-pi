@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compute-pi-deployment
+  labels:
+    app: compute-pi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: compute-pi
+  template:
+    metadata:
+      labels:
+        app: compute-pi
+    spec:
+      containers:
+      - name: compute-pi-con
+        image: wincus/compute-pi:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 200m
+            memory: 32Mi
+          requests:
+            cpu: 100m
+            memory: 32Mi
+        ports:
+        - containerPort: 80

@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: compute-pi
+spec:
+  maxReplicas: 12
+  minReplicas: 6
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: compute-pi-deployment
+  targetCPUUtilizationPercentage: 90
