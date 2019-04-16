@@ -8,6 +8,10 @@ import (
 	"github.com/claygod/PiHex"
 )
 
+var (
+	version = "Build version unavailable"
+)
+
 func handler(w http.ResponseWriter, r *http.Request) {
 
 	digitsOfPi, err := strconv.Atoi(r.URL.Path[1:])
@@ -21,7 +25,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	pi := PiHex.New()
 
-	res := struct{ Result []byte }{pi.Get(0, digitsOfPi)}
+	res := struct{ 
+		Result []byte 
+		Version string
+		}{pi.Get(0, digitsOfPi), version}
 
 	jData, _ := json.Marshal(&res)
 

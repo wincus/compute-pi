@@ -3,8 +3,8 @@ RELEASE_VER   := $(shell git rev-parse --short HEAD)
 build:
 	RELEASE_VER=$(RELEASE_VER) docker-compose build	
 
-run:
-	docker-compose up
+run: build
+	docker-compose up -d
 
 stop:
 	docker-compose stop
@@ -15,5 +15,8 @@ stats:
 clean:
 	docker-compose rm -f
 
+%:
+	curl -w "Total Time: %{time_total}" http://localhost:8080/$@
 
-.PHONY: build run clean  stop stats
+
+.PHONY: build run clean stop stats
